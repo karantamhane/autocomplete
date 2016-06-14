@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Autcomplete</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+</head>
+<body>
+    <h2>Welcome to Autocomplete!</h2>
+    <p>Start typing to get suggestions</p>
+    <form id="wordform" method="post">
+        <input list="suggestions" id="wordbox" type="text" name="wordbox"><br>
+    </form>
+    <script type="text/javascript">
+        $(function(){
+            $("input#wordbox").keyup(function(key){
+                console.log(key);
+                if(key.keyCode != 27){
+                    var p = $("input#wordbox").val();
+                    $.get("http://localhost:5000", {'word':p}, function(data){
+                        $("#matches").html($(data).filter("#matches"));
+                    })
+                }
+            });
+        });
+    </script>
+    <div id="matches">
+    {% if wordlist %}
+        <!-- <ul>
+            {% for m in wordlist %}
+                <li> {{m}} </li><br>
+            {% endfor %}
+        </ul> -->
+        
+        <select id="suggestions" size="10" style="font-size:large;width:350px;overflow-y:scroll;overflow-x:hidden">
+            {% for m in wordlist %}
+                <option>{{m}}</option>
+            {% endfor %}
+        </select>
+
+        <!-- <datalist id="suggestions">
+            {% for m in wordlist %}
+                <option value="{{m}}"></option>
+            {% endfor %}
+        </datalist> -->
+    {% endif %}
+    </div>
+</body>
+</html>

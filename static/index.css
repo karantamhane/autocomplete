@@ -1,0 +1,24 @@
+body {
+  background-color: white;
+  font-family: Geneva;
+  font-size: larger;
+  margin-left: 30%;
+  margin-top: 8%;
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  height: 20px;
+  width: 35%;
+  font-family: Geneva;
+  font-size: medium;
+}
+
+p {
+  margin-top: 5%;
+}
+
+ul {
+  font-size: large;
+}
+
